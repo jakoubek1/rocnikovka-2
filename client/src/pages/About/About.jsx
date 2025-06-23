@@ -1,5 +1,15 @@
+import React from 'react';
+import Navbar from '../../components/Navbar/Navbar'; ""
+
+
 const About = () => {
-    return <h2>O nás</h2>;
+    return (
+      <div className='Navbar'>
+        <Navbar/>
+        <h2>jwjfkwjfwefk</h2>
+      </div>
+      
+    )
   };
   
   export default About;
