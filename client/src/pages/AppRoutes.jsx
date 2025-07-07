@@ -1,45 +1,42 @@
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "../pages/Home/Home";
-import About from "../pages/About/About"
-import Rezervace from "../pages/Rezervace/Rezervace";
-import Eshop from "../pages/Eshop/Eshop";
-import Přihlášení from "../components/Přihlášení/Přihlášení";
-import Registrace from "../components/Registrace/Registrace";
+import React from 'react'
+import Home from "./Home";
+import ItemCreateForm from "./ItemCreateForm";
+import ItemList from "./ItemList";
+import ItemView from "./ItemView";
+import MainView from "./MainView";
+import MainList from "./MainList";
+import ItemUpdateForm from "./ItemUpdateForm";
 import Admin from "./Admin";
+import Cas from "./Cas";
+import About from "./About";
+import Mista from "./Mista";
+import Doprava from "./Doprava/index"
+import Pratele from "./pratele/index"
 
-import Create from "./ItemsCreateForm";
-import Clothing from "./ItemsList";
-import Update from "./ItemsUpdateForm";
-import ClothingView from "./ItemsView";
-import Product from "./MainView";
-import Products from "./MainList/index";
-import CreatedClothing from "./ItemsCreateForm/CreatedItems";
-
-function App() {
+import Treneri from "./Treneri/index";
+export default function AppRoutes() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />            
-        <Route path="/Home" element={<Home />} />
-        <Route path="/About" element={<About />} />
-        <Route path="/Eshop" element={<Eshop />} />
-        <Route path="/Rezervace" element={<Rezervace />} />
-        <Route path="/Přihlášení" element={<Přihlášení />} />
-        <Route path="/Registrace" element={<Registrace />} />
-        <Route path="/admin" element={<Admin />} />
-          <Route path="/createitems" element={<Create />} />
-          <Route path="/items" element={<Clothing />} />
-          <Route path="/mindset" element={<MindsetList />} />
-          <Route path="/update/:id" element={<Update />} />
-          <Route path="/view/:id" element={<ClothingView />} />
-          <Route path="/created-item/:id" element={<CreatedClothing />} />
-          <Route path="/item/:id" element={<Clothing />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/product/:id" element={<Product />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    <>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/admin" element={<Admin/>}/>
+                <Route path="/cas" element={<Cas/>}/>
+                <Route path="/About" element={<About/>}/>
+                <Route path="/mista" element={<Mista/>}/>
+                <Route path="/add-item" element={<ItemCreateForm/>}/>
+                <Route path="/view-item" element={<ItemList/>}/>
+                <Route path="/item/:id" element={<ItemView/>}/>
+                <Route path="/product/:id" element={<MainView/>}/>
+                <Route path="/products" element={<MainList/>}/>    
+                <Route path="/update-item/:id" element={<ItemUpdateForm/>}/>
+                <Route path="/Doprava" element={<Doprava/>}/>
+                <Route path="/Pratele" element={<Pratele/>}/>
+                
+                <Route path="/Treneri" element={<Treneri/>}/>
+            </Routes>
+        </BrowserRouter>
+    </>
+  )
 }
-
-export default App;

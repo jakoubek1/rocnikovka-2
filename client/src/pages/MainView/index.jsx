@@ -1,27 +1,21 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { getClothingById } from "../../models/items";
-import { cn } from "@/lib/utils";
+import { useParams, useNavigate } from "react-router-dom";
+import { getItemById } from "../../models/Item";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 export default function MainView() {
   const { id } = useParams();
-  const [clothing, setClothing] = useState();
+  const [item, setItem] = useState();
   const [isLoaded, setLoaded] = useState(false);
-  const [quantity, setQuantity] = useState(1);
-  const [selectedSize, setSelectedSize] = useState();
-  const [selectedColor, setSelectedColor] = useState();
-
-  const handleIncrease = () => setQuantity((prev) => prev + 1);
-
-  const handleDecrease = () => {
-    if (quantity > 1) setQuantity((prev) => prev - 1);
-  };
+  const [selectedSize, setSelectedSize] = useState("");
+  const navigate = useNavigate();
 
   const load = async () => {
-    const data = await getClothingById(id);
+    const data = await getItemById(id);
     if (data.status === 500 || data.status === 404) return setLoaded(null);
     if (data.status === 200) {
-      setClothing(data.payload);
+      setItem(data.payload);
       setLoaded(true);
     }
   };
@@ -32,7 +26,7 @@ export default function MainView() {
 
   if (isLoaded === null) {
     return (
-      <div className="min-h-screen text-white flex justify-center items-center">
+      <div className="min-h-screen flex justify-center items-center text-white bg-black">
         <p>Produkt nenalezen.</p>
       </div>
     );
@@ -40,101 +34,85 @@ export default function MainView() {
 
   if (!isLoaded) {
     return (
-      <div className="min-h-screen text-white flex justify-center items-center">
+      <div className="min-h-screen flex justify-center items-center text-white bg-black">
         <p>Načítání produktu...</p>
       </div>
     );
   }
 
-  const availableColors = clothing.colors?.length > 0 ? clothing.colors : ["Černá"];
+  const sizes = ["XS", "S", "M", "L", "XL"];
 
   return (
-    <div className="min-h-screen text-white max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-2 gap-12">
-      <div className="flex justify-center items-center">
-        <img
-          src={clothing.image}
-          alt={clothing.name}
-          style={{ filter: "drop-shadow(0 0 10px white)" }}
-          className="rounded-xl w-full max-w-md"
-          draggable="false"
-        />
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 text-white relative">
+      <Header />
 
-      <div className="flex flex-col justify-center gap-6">
-        <h1 className="text-4xl font-bold uppercase mt-1">{clothing.name}</h1>
-
-        <div className="text-lg space-y-2">
-          <p>
-            <span className="font-semibold">Cena: </span>
-            <span className="line-through text-gray-400 mr-2">
-              {Math.floor(clothing.price * 1.5)} Kč
-            </span>
-            <span className="font-bold">{clothing.price} Kč</span>
-            <span className="bg-white text-black text-sm font-bold px-3 py-1 rounded-full ml-2">
-              Sale
-            </span>
+      <div className="max-w-6xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-2 gap-16 relative">
+        <div className="flex flex-col items-center mt-12">
+          <img
+            src={item.image}
+            alt={item.name}
+            className="rounded-2xl w-full max-w-md shadow-2xl object-cover"
+            draggable="false"
+            style={{ imageRendering: "auto" }}
+          />
+          <p className="text-sm text-gray-400 mt-4 text-center max-w-md">
+            Oversized střih. 100% bavlna. Inspirace pouliční kulturou.
           </p>
         </div>
 
-        <div>
-          <p className="font-semibold mb-2">Vyber barvu:</p>
-          <div className="flex gap-2 font-semibold">
-            {availableColors.map((color) => (
-              <button
-                key={color}
-                onClick={() => setSelectedColor(color)}
-                className={cn(
-                  "border border-white px-4 py-2 rounded-lg hover:bg-white hover:text-black transition-all",
-                  selectedColor === color ? "bg-white text-black" : ""
-                )}
-              >
-                {color}
-              </button>
-            ))}
-          </div>
-        </div>
+        <div className="flex flex-col justify-center gap-6">
+          <h1 className="text-4xl font-bold uppercase mt-1 flex items-center gap-4">
+            {item.name}
+            <span className="bg-yellow-400 text-black text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg select-none">
+              Nová kolekce
+            </span>
+          </h1>
 
-        <div>
-          <p className="font-semibold mb-2">Velikost:</p>
-          <div className="flex gap-2 font-semibold">
-            {["XS", "S", "M", "L", "XL"].map((size) => (
-              <button
-                key={size}
-                onClick={() => setSelectedSize(size)}
-                className={cn(
-                  "border border-white px-4 py-2 rounded-lg hover:bg-white hover:text-black transition-all",
-                  selectedSize === size ? "bg-white text-black" : ""
-                )}
-              >
-                {size}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <p className="font-semibold mb-2">Množství:</p>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center border border-white rounded-lg font-semibold">
-              <button onClick={handleDecrease} className="px-3 py-1">-</button>
-              <span className="px-4">{quantity}</span>
-              <button onClick={handleIncrease} className="px-3 py-1">+</button>
+          <div className="text-lg space-y-2">
+            <div className="flex items-center gap-2 text-yellow-400 text-sm">
+              ⭐⭐⭐⭐⭐ <span className="text-gray-400">(48 recenzí)</span>
             </div>
+            <p>
+              <span className="font-semibold">Cena: </span>
+              <span className="line-through text-gray-500 mr-2">
+                {Math.floor(item.price * 1.5)} Kč
+              </span>
+              <span className="font-bold text-white">{item.price} Kč</span>
+              <span className="bg-white text-black text-sm font-bold px-3 py-1 rounded-full ml-2">
+                -33%
+              </span>
+            </p>
+          </div>
+
+          <div>
+            <label htmlFor="size" className="block text-sm font-semibold mb-2">
+              Velikost:
+            </label>
+            <select
+              id="size"
+              value={selectedSize}
+              onChange={(e) => setSelectedSize(e.target.value)}
+              className="bg-zinc-900 border border-white rounded-full px-4 py-2 text-white w-full hover:border-gray-400 focus:outline-none shadow-sm transition"
+            >
+              <option value="" disabled>
+                Zvol velikost
+              </option>
+              {sizes.map((size) => (
+                <option key={size} value={size}>
+                  {size}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex flex-col gap-3 mt-5">
+            <button className="bg-white text-black font-bold py-3 rounded-xl hover:bg-gray-300 transition-all">
+              Přidat do košíku
+            </button>
           </div>
         </div>
-
-        <div className="text-sm text-gray-300 mt-2 space-y-2">
-          <p><b>• Materiál:</b> {clothing.material}</p>
-          <p><b>• Gramáž:</b> {clothing.gram}G</p>
-          <p><b>• Doba dodání: </b>1–{clothing.delivery} dny</p>
-
-          <p className="pt-2 font-bold">Návod k praní:</p>
-          <p>
-            Perte maximálně na 30 °C. Před praním otočte oblečení naruby.
-            Pokud budete dodržovat tento postup, produkt nebude nijak poničen.
-          </p>
-        </div>
       </div>
+      <Footer />
     </div>
   );
 }
