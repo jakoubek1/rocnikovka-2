@@ -89,7 +89,7 @@ export default function ItemView() {
 
         <div className="flex justify-between mt-6 text-sm text-blue-500">
           <Link to={`/update-item/${id}`} className="hover:underline">
-            ✏️ Aktualizovat item
+             Aktualizovat item
           </Link>
           <Link to="/admin" className="hover:underline">
             Admin panel

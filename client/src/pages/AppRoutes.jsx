@@ -13,7 +13,6 @@ import About from "./About";
 import Mista from "./Mista";
 import Doprava from "./Doprava/index"
 import Pratele from "./pratele/index"
-
 import Treneri from "./Treneri/index";
 export default function AppRoutes() {
   return (

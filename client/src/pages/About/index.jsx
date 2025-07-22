@@ -15,25 +15,28 @@ const About = () => {
       <div className="flex flex-col min-h-screen w-full">
 
         <div className="flex flex-col md:flex-row w-[90%] mx-auto my-10 h-auto md:h-[400px] bg-zinc-900 text-white p-5 rounded-2xl border-2 border-yellow-400">
-          <div className="flex-1 flex flex-col justify-center text-left p-5">
-            <h1 className="text-4xl font-bold text-[#b58900] mb-4 drop-shadow-md">
-              Náš Marvel
-            </h1>
-            <p className="text-white text-base leading-relaxed">
-              Marvel Gym je v Mladé Boleslavi velmi známý pojem. Jedná se o dva kluby, které jsou svým designem i atmosférou zcela jedinečné. Majitel klubu Pavel Lepič je milovník pohybu, ale také velmi dynamický člověk plný energie. Miluje hudbu, společnost, život na plný plyn. Veškerá jeho vášeň je přenesena do klubové kultury. Fitka Marvel Gym jsou od rána do večera narvaná k prasknutí. Potkávají se zde všechny věkové kategorie a dominují mladí, kteří Marvel Gym vnímají jako místo, kde nikdo z okolí Boleslavi nemůže chybět.
-              </p>
-          </div>
-          <div className="flex-1 flex justify-center items-center p-4">
-            <iframe
-              src="https://www.youtube.com/embed/AW6Eq0OjjVY"
-              title="YouTube video"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="w-[90%] h-full rounded-xl object-cover max-h-[400px] transition-transform duration-300 ease-in-out hover:scale-105"
-            ></iframe>
-          </div>
-        </div>
+  <div className="flex-1 flex flex-col justify-center text-left p-5">
+    <h1 className="text-4xl font-bold text-[#b58900] mb-4 drop-shadow-md">
+      Náš Marvel
+    </h1>
+    <p className="text-white text-base leading-relaxed">
+      Marvel Gym je v Mladé Boleslavi velmi známý pojem. Jedná se o dva kluby, které jsou svým designem i atmosférou zcela jedinečné. Majitel klubu Pavel Lepič je milovník pohybu, ale také velmi dynamický člověk plný energie. Miluje hudbu, společnost, život na plný plyn. Veškerá jeho vášeň je přenesena do klubové kultury. Fitka Marvel Gym jsou od rána do večera narvaná k prasknutí. Potkávají se zde všechny věkové kategorie a dominují mladí, kteří Marvel Gym vnímají jako místo, kde nikdo z okolí Boleslavi nemůže chybět.
+    </p>
+  </div>
+  <div className="flex-1 flex justify-center items-center p-4">
+    <iframe
+      src="https://www.youtube.com/embed/AW6Eq0OjjVY"
+      width="640"
+      height="360"
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+      className="rounded-xl border-2 border-yellow-500 shadow-md"
+      loading="lazy"
+    />
+  </div>
+</div>
+
 
         <div className="flex flex-col md:flex-row-reverse w-[90%] mx-auto my-10 h-auto md:h-[400px] bg-zinc-900 text-white p-5 rounded-2xl border-2 border-yellow-400">
           <div className="flex-1 flex flex-col justify-center text-left p-5">
