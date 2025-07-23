@@ -11,7 +11,7 @@ export default function Header() {
   const navLinks = [
     { name: "Home", to: "/" },
     { name: "O nás", to: "/About" },
-    { name: "Rezervace trenéra", to: "/Treneri" },
+    { name: "Rezervace trenéra", to: "/rezervace" },
     { name: "E-shop", to: "/products" },
   ];
 

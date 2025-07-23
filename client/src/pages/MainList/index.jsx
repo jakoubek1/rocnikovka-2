@@ -41,8 +41,8 @@ export default function Main() {
         style={{ backgroundImage: `url(${Image})` }}
       >
         <main className="flex-grow px-6 md:px-12 lg:px-24 py-20">
-          <h1 className="text-4xl font-bold text-yellow-400 text-center mb-12">
-            E-shop
+          <h1 className="text-6xl font-bold text-yellow-400 text-center mb-12">
+            Co si vybereš?
           </h1>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12 justify-center items-start">

@@ -66,7 +66,7 @@ const Home = () => {
 
           <div className="flex gap-6 justify-center flex-wrap mb-8">
             <Link
-              to="/treneri"
+              to="/rezervace"
               className="bg-yellow-400 text-black font-bold py-3 px-8 rounded-full hover:bg-yellow-500 transition"
             >
               Rezervace trenéra
@@ -86,22 +86,22 @@ const Home = () => {
         </div>
       </main>
 
-      
+     
       <div className="flex flex-col md:flex-row w-[90%] mx-auto my-12 h-auto md:h-[450px] bg-zinc-900 text-white p-8 rounded-2xl border-2 border-yellow-400">
         <div className="flex-1 flex flex-col justify-center text-left p-6">
           <h1 className="text-5xl font-bold text-yellow-400 mb-6 drop-shadow-md">
             Co u nás najdeš
           </h1>
           <p className="text-white text-base md:text-lg leading-relaxed">
-            Naše posilovny patří mezi ty nejlepší v Mladé Boleslavi! Nabízíme
-            špičkové vybavení v obou našich provozovnách... Tak na co čekáš?
-            Přijď si zacvičit – tvé nové já začíná u nás!
+            Naše posilovny patří mezi ty nejlepší v Mladé Boleslavi! Nabízíme špičkové vybavení, moderní zázemí a přátelskou atmosféru v obou našich provozovnách. Ať už chceš shodit pár kil, nabrat svaly nebo si jen vyčistit hlavu po náročném dni, u nás najdeš ideální prostor pro svůj trénink. Naši profesionální trenéři ti pomohou s plánem, motivací i technikou. Tak na co ještě čekáš? Přijď si zacvičit – tvé nové já začíná právě tady, u nás v Marvel Gym!
+
           </p>
         </div>
         <div className="flex-1 flex justify-center items-center p-6n  border-yellow-500">
           <img
             src={Logo}
             alt="Fitness gym"
+            draggable="false"
             className="max-w-full max-h-[380px] rounded-xl object-cover"
           />
         </div>
@@ -225,8 +225,7 @@ const Home = () => {
             Velká novinka
           </h2>
           <p className="text-white text-base md:text-lg leading-relaxed">
-            S radostí oznamujeme, že Marvel Gym rozšiřuje své působení a otevírá třetí posilovnu v Mladé Boleslavi. Těšit se můžete na špičkové vybavení, moderní prostředí a prvotřídní zázemí.
-Otevření plánujeme přibližně na říjen 2025 – sledujte nás pro více informací!
+            S velkou radostí oznamujeme, že Marvel Gym dále roste a rozšiřuje své působení – v říjnu 2025 plánujeme otevření již třetí posilovny v Mladé Boleslavi! Nová provozovna nabídne špičkové vybavení, moderní interiér a prvotřídní zázemí, které splní očekávání jak začátečníků, tak i náročných sportovců. Těšit se můžete také na motivující prostředí, individuální přístup trenérů a komunitu lidí, kteří na sobě chtějí makat. Sledujte nás pro aktuální novinky – otevření se blíží a vy u toho nesmíte chybět!
           </p>
         </div>
         <div className="flex-1 flex justify-center items-center p-6">
@@ -234,7 +233,7 @@ Otevření plánujeme přibližně na říjen 2025 – sledujte nás pro více i
             src={video}
             controls
             autoPlay
-           
+            muted
             playsInline
             className="w-full h-[320px] md:h-[400px] rounded-xl object-cover shadow-lg"
           />

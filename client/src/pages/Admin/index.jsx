@@ -26,17 +26,34 @@ export default function Admin() {
       title: "Main Page",
       color: "from-blue-100 to-blue-50",
     },
+     {
+      to: "/add-reservation",
+     icon: <ShoppingBag className="h-6 w-6 text-orange-600" />,
+      title: "Vytvořit Rezervaci",
+      color: "from-orange-100 to-green-50",
+    },
+    {
+      to: "/view-reservation",
+     icon: <ShoppingBag className="h-6 w-6 text-orange-600" />,
+      title: "Vytvořit Rezervaci",
+      color: "from-orange-100 to-green-50",
+    },
   ];
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3000/api/login", { password }); 
+      
+      const res = await axios.post("/auth/login", { password }); 
+
       if (res.data.success) {
         setIsLoggedIn(true);
+      } else {
+        alert("Neplatné heslo!");
       }
     } catch (err) {
-      alert("Neplatné heslo!");
+      alert("Chyba při přihlášení!");
+      console.error(err);
     }
   };
 

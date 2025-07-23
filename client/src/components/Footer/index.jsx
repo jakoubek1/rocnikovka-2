@@ -137,12 +137,12 @@ export default function Footer() {
             <input
               type="email"
               placeholder="Tvůj e-mail"
-              className="w-full md:w-[220px] rounded-full bg-zinc-800 border border-gray-700 px-2 py-2 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition"
+              className="w-full md:w-[220px] rounded-full bg-zinc-800 border border-gray-700 px-4 py-2 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition"
               required
             />
             <button
               type="submit"
-              className="bg-yellow-400 text-black text-sm font-semibold rounded-full px-3 py-2 hover:bg-yellow-500 transition-shadow shadow-md hover:shadow-lg whitespace-nowrap"
+              className="bg-yellow-400 text-black text-sm font-semibold rounded-full px-5 py-2 hover:bg-yellow-500 transition-shadow shadow-md hover:shadow-lg whitespace-nowrap"
             >
               Přihlásit se
             </button>
