@@ -52,8 +52,8 @@ const Home = () => {
     >
       <div className="absolute inset-0 bg-black/10 z-0" />
       <Header />
+<main className="relative flex items-center justify-center text-center px-6 md:px-12 lg:px-24 min-h-[85vh] overflow-hidden mb-16">
 
-      <main className="relative flex items-center justify-center text-center px-6 md:px-12 lg:px-24 min-h-[60vh] overflow-hidden mb-16">
         <div
           className="absolute inset-0 bg-cover bg-center z-0"
           style={{ backgroundImage: `url(${SectionBgImage})` }}
@@ -245,4 +245,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home; 

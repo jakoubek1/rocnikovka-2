@@ -137,7 +137,8 @@ export default function Footer() {
             <input
               type="email"
               placeholder="Tvůj e-mail"
-              className="w-full md:w-[220px] rounded-full bg-zinc-800 border border-gray-700 px-4 py-2 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition"
+className="w-full md:w-[230px] rounded-full bg-zinc-800 border border-gray-700 px-4 py-2 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition -ml-[28px]"
+
               required
             />
             <button

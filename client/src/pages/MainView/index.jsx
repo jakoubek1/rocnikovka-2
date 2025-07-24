@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getItemById } from "../../models/Item";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import { Toaster, toast } from "sonner";
 
 export default function MainView() {
   const { id } = useParams();
@@ -18,6 +19,33 @@ export default function MainView() {
       setItem(data.payload);
       setLoaded(true);
     }
+  };
+
+  const addToCart = () => {
+    if (!selectedSize) return toast.error("Zvolte nejdříve velikost");
+
+    const newCartItem = {
+      id: item._id,
+      count: 1,
+      size: selectedSize,
+    };
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const itemIndex = cart.findIndex(
+      (cartItem) =>
+        cartItem.id === newCartItem.id && cartItem.size === selectedSize
+    );
+
+    if (itemIndex !== -1) {
+      cart[itemIndex].count += 1;
+    } else {
+      cart.push(newCartItem);
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    toast.success("Položka byla přidána do košíku!");
   };
 
   useEffect(() => {
@@ -45,6 +73,8 @@ export default function MainView() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 text-white relative">
       <Header />
+
+      <Toaster position="bottom-right" richColors />
 
       <div className="max-w-6xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-2 gap-16 relative">
         <div className="flex flex-col items-center mt-12">
@@ -106,7 +136,10 @@ export default function MainView() {
           </div>
 
           <div className="flex flex-col gap-3 mt-5">
-            <button className="bg-white text-black font-bold py-3 rounded-xl hover:bg-gray-300 transition-all">
+            <button
+              className="bg-white text-black font-bold py-3 rounded-xl hover:bg-gray-300 transition-all"
+              onClick={addToCart}
+            >
               Přidat do košíku
             </button>
           </div>

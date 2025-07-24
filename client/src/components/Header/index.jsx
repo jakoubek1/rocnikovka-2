@@ -1,12 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ShoppingCart, Search } from "lucide-react";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo.png";  
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   const searchInputRef = useRef(null);
+  const navigate = useNavigate();
 
   const navLinks = [
     { name: "Home", to: "/" },
@@ -15,7 +18,6 @@ export default function Header() {
     { name: "E-shop", to: "/products" },
   ];
 
-
   useEffect(() => {
     if (searchOpen && searchInputRef.current) {
       searchInputRef.current.focus();
@@ -23,23 +25,41 @@ export default function Header() {
   }, [searchOpen]);
 
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (
-        searchOpen &&
-        searchInputRef.current &&
-        !searchInputRef.current.parentElement.contains(e.target)
-      ) {
-        setSearchOpen(false);
-      }
-    };
-    window.addEventListener("mousedown", handleClickOutside);
-    return () => window.removeEventListener("mousedown", handleClickOutside);
-  }, [searchOpen]);
+    if (searchTerm.length < 2) {
+      setSearchResults([]);
+      return;
+    }
+
+    const delayDebounceFn = setTimeout(() => {
+      fetch(`/search?q=${encodeURIComponent(searchTerm)}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setSearchResults(data.payload || []);
+        })
+        .catch((err) => {
+          console.error("Search error:", err);
+          setSearchResults([]);
+        });
+    }, 500);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm]);
+
+  const handleSearchSelect = (result) => {
+    setSearchOpen(false);
+    setSearchTerm("");
+    setSearchResults([]);
+
+    if (result.type === "item") {
+      navigate(`/item/${result._id}`);
+    } else if (result.type === "reservation") {
+      navigate(`/reservation/${result._id}`);
+    }
+  };
 
   return (
     <header className="relative bg-zinc-900 text-gray-300 sticky top-0 z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 h-20 flex items-center justify-between">
-     
         <Link to="/" className="flex items-center space-x-3 flex-none">
           <img src={logo} alt="Logo" className="h-12 w-auto" />
           <span className="hidden md:block text-3xl font-extrabold text-white select-none">
@@ -47,7 +67,6 @@ export default function Header() {
           </span>
         </Link>
 
-        
         <nav className="hidden md:flex flex-1 justify-center space-x-10 font-medium text-lg">
           {navLinks.map(({ name, to }) => (
             <Link
@@ -61,10 +80,8 @@ export default function Header() {
           ))}
         </nav>
 
-        
         <div className="flex items-center space-x-4 justify-end w-full md:w-auto">
-          
-          <div className="flex items-center">
+          <div className="flex items-center relative">
             <button
               aria-label="Otevřít vyhledávání"
               onClick={() => setSearchOpen((p) => !p)}
@@ -78,6 +95,8 @@ export default function Header() {
               ref={searchInputRef}
               type="text"
               placeholder="Hledat…"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
               className={`bg-zinc-800 placeholder-gray-400 text-gray-100 rounded-md outline-none transition-all duration-300 ease-out
                 ${
                   searchOpen
@@ -89,9 +108,21 @@ export default function Header() {
                 if (e.key === "Escape") setSearchOpen(false);
               }}
             />
+            {searchOpen && searchResults.length > 0 && (
+              <ul className="absolute top-full mt-1 left-0 w-56 max-h-60 overflow-auto bg-zinc-800 border border-yellow-400 rounded-md z-50">
+                {searchResults.map((result) => (
+                  <li
+                    key={result._id}
+                    onClick={() => handleSearchSelect(result)}
+                    className="cursor-pointer px-4 py-2 hover:bg-yellow-400 hover:text-zinc-900 transition"
+                  >
+                    {result.name} <small>({result.type})</small>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
-          
           <Link
             to="/cart"
             aria-label="Shopping cart"
@@ -100,7 +131,6 @@ export default function Header() {
             <ShoppingCart className="h-7 w-7" />
           </Link>
 
-          
           <button
             onClick={() => setMenuOpen((p) => !p)}
             aria-label="Toggle menu"
@@ -133,7 +163,6 @@ export default function Header() {
         </div>
       </div>
 
-      
       <div
         className={`md:hidden bg-zinc-900 text-gray-300 shadow-md overflow-hidden transition-max-height duration-300 ease-in-out ${
           menuOpen ? "max-h-96 py-4" : "max-h-0"

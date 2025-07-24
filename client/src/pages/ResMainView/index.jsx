@@ -47,11 +47,11 @@ export default function MainView() {
       return;
     }
 
-    
+    // Tady by mohla být logika odeslání rezervace na backend
 
     toast.success("Rezervace byla úspěšně potvrzena!");
-    
-    
+    // případně redirect:
+    // navigate("/confirmation-page");
   };
 
   if (isLoaded === null) {
