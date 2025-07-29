@@ -9,11 +9,13 @@ export default defineConfig({
     },
   },
   server: {
+    port: 5173, 
     proxy: {
       '/auth': 'http://localhost:3000',
       '/item': 'http://localhost:3000',
-      '/search': 'http://localhost:3000',  
+      '/search': 'http://localhost:3000',
+      '/reservation': 'http://localhost:3000',
+      
     },
   },
 });
-

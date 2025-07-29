@@ -1,24 +1,26 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useEffect, useState } from "react";
-import CartItem from "./item";
+import CartItem from "./Item";
 import Image from "../../assets/pozadi.jpg";
 import { getItemById } from "@/models/Item";
+import { createPaymentIntent, getConfig } from "@/models/Stripe";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./CheckoutForm";
+import { loadStripe } from "@stripe/stripe-js";
 
 export default function Cart() {
+  const [stripePromise, setStripePromise] = useState(null);
+  const [clientSecret, setClientSecret] = useState("");
   const [cart, setCart] = useState(
     JSON.parse(localStorage.getItem("cart")) || []
   );
+  const [showPayment, setShowPayment] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const cartReload = () => {
     setCart(JSON.parse(localStorage.getItem("cart")));
   };
-
-  useEffect(() => {
-    window.addEventListener("cartReload", cartReload);
-  }, []);
-
-  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     const calculateTotal = async () => {
@@ -38,6 +40,30 @@ export default function Cart() {
     calculateTotal();
   }, [cart]);
 
+  useEffect(() => {
+    window.addEventListener("cartReload", cartReload);
+  }, []);
+
+  useEffect(() => {
+    if (totalPrice == 0) return;
+    stripeConfig();
+    stripeLoad();
+  }, [totalPrice]);
+
+  const stripeConfig = async () => {
+    const stripeGetConfig = await getConfig();
+    setStripePromise(loadStripe(stripeGetConfig.publishableKey));
+  };
+
+  const stripeLoad = async () => {
+    const stripeClientSecret = await createPaymentIntent(totalPrice);
+    setClientSecret(stripeClientSecret.clientSecret);
+  };
+
+  const handlePages = () => {
+    if (!showPayment) setShowPayment(true);
+  };
+
   return (
     <>
       <Header />
@@ -48,19 +74,36 @@ export default function Cart() {
         <div className="container mx-auto h-full">
           {cart && cart.length > 0 ? (
             <>
-              {cart.map((value, index) => (
-                <CartItem
-                  key={`${value.id}-${index}`}
-                  index={index}
-                  {...value}
-                />
-              ))}
-              <div className="flex justify-between">
-                <p className="text-white text-2xl">Celková cena: {totalPrice},-</p>
-                <button className="bg-yellow-400 text-black font-bold py-3 rounded-xl transition-all px-4">
-                  Pokračovat
-                </button>
-              </div>
+              {!showPayment ? (
+                <>
+                  {cart.map((value, index) => (
+                    <CartItem
+                      key={`${value.id}_${index}`}
+                      index={index}
+                      {...value}
+                    />
+                  ))}
+                  <div className="flex justify-between items-center">
+                    <p className="text-white text-2xl">
+                      Celková cena: {totalPrice},-
+                    </p>
+                    <button
+                      className="bg-yellow-400 text-black font-bold py-3 rounded-xl transition-all px-4"
+                      onClick={handlePages}
+                    >
+                      {showPayment ? "Zaplatit" : "Pokračovat"}
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {clientSecret && stripePromise && (
+                    <Elements stripe={stripePromise} options={{ clientSecret }}>
+                      <CheckoutForm totalPrice={totalPrice} />
+                    </Elements>
+                  )}
+                </>
+              )}
             </>
           ) : (
             <div className="h-full text-4xl md:text-5xl font-bold text-yellow-400 drop-shadow-md leading-tight text-center py-4">

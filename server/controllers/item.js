@@ -1,4 +1,4 @@
-const Item = require("../models/item");
+const Item = require("../models/Item");
 
 exports.getAllItems = async (req, res, next) => {
   try {
@@ -44,6 +44,7 @@ exports.createItem = async (req, res, next) => {
       color: req.body.color,
       price: req.body.price,
       image: req.body.image,
+      stockQuantity: req.body.stockQuantity,
     });
     const result = await data.save();
     if (result) {
@@ -69,8 +70,9 @@ exports.updateItem = async (req, res, next) => {
       color: req.body.color,
       price: req.body.price,
       image: req.body.image,
+      stockQuantity: req.body.stockQuantity,
     };
-    const result = await Item.findByIdAndUpdate(req.params.id, data, { new: true });
+    const result = await Item.findByIdAndUpdate(req.params.id, data, { new: true, runValidators: true });
     if (result) {
       return res.status(200).json({
         message: "Item updated",

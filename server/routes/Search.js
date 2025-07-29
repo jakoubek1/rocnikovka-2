@@ -1,36 +1,36 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Item = require('../models/item');
-const Reservation = require('../models/Reservation');
+const Item = require("../models/Item");
+const Reservation = require("../models/Reservation");
 
+router.get("/", async (req, res) => {
+  const { q } = req.query;
+  if (!q || q.length < 2) return res.json({ payload: [] });
 
-router.get('/', async (req, res) => {
-  const query = req.query.q;
-
-  if (!query || query.length < 2) {
-    return res.json({ payload: [] }); 
-  }
+  const regex = new RegExp(q, "i"); 
 
   try {
-    
-    const items = await Item.find({
-      name: { $regex: query, $options: 'i' }
-    }).limit(10);
+    const [items, reservations] = await Promise.all([
+      Item.find({ name: regex }).limit(5).lean(),
+      Reservation.find({ name: regex }).limit(5).lean(),
+    ]);
 
-    
-    const reservations = await Reservation.find({
-      trainerName: { $regex: query, $options: 'i' }
-    }).limit(10);
+    const formattedItems = items.map((item) => ({
+      _id: item._id,
+      name: item.name,
+      type: "item",
+    }));
 
-    const results = [
-      ...items.map(i => ({ ...i.toObject(), type: 'item' })),
-      ...reservations.map(r => ({ ...r.toObject(), type: 'reservation' })),
-    ];
+    const formattedReservations = reservations.map((res) => ({
+      _id: res._id,
+      name: res.name,
+      type: "reservation",
+    }));
 
-    res.json({ payload: results });
+    res.json({ payload: [...formattedItems, ...formattedReservations] });
   } catch (err) {
-    console.error('Chyba při vyhledávání:', err);
-    res.status(500).json({ message: 'Chyba serveru při vyhledávání' });
+    console.error("Search error:", err);
+    res.status(500).json({ error: "Search failed" });
   }
 });
 

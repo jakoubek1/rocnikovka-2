@@ -21,7 +21,7 @@ import ReservationView from "./ReservationView/index";
 import ResMainView from "./ResMainView/index";
 import ResMainList from "./ResMainList/index"
 import Cart from "./Cart";
-import Search from "../components/Search/index";
+import Completion from "./Completion";
 
 export default function AppRoutes() {
   return (
@@ -46,14 +46,13 @@ export default function AppRoutes() {
 
                 <Route path="/add-reservation" element={<ReservationCreateForm/>}/>
                 <Route path="/reservation/:id" element={<ReservationView/>}/>
-                <Route path="/view-reservation" element={<ReservationList/>}/>
+                <Route path="/view-reservation" element={<ReservationList />} />
                 <Route path="/update-reservation/:id" element={<ReservationUpdateForm/>}/>
                 <Route path="/rezervace" element={<ResMainList/>}/>
                 <Route path="/rezervace/:id" element={<ResMainView/>}/>
                 
                 <Route path="/cart" element={<Cart />} />
-                <Route path="/search" element={<Search />} />
-
+                <Route path="/completion" element={<Completion />} />
             </Routes>
         </BrowserRouter>
     </>

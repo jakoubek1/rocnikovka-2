@@ -35,7 +35,7 @@ export default function PrateleMarvel() {
                 alt="Honza Jiruš"
                 className="rounded-xl shadow-md w-full max-w-sm"
               />
-              <p className="mt-4 font-semibold text-white">Honza Jiruš</p>
+              <p className="mt-4 font-semibold text-white">Jan Jiruš</p>
               <p className="text-sm text-gray-400">Nejsilnější muž v ČR</p>
             </div>
 

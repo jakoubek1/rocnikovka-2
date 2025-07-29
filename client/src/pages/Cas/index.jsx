@@ -74,7 +74,7 @@ const OteviraciDoba = () => {
         className="flex flex-col justify-center items-center bg-cover bg-center min-h-[calc(100vh-160px)] px-4 py-8"
         style={{ backgroundImage: `url(${Image})` }}
       >
-        <div className="bg-black p-6 rounded-2xl border-2 border-yellow-400 shadow-md w-full max-w-5xl text-yellow-400">
+        <div className=" bg-zinc-900 p-6 rounded-2xl border-2 border-yellow-400 shadow-md w-full max-w-5xl text-yellow-400">
           <h1 className="text-3xl font-bold text-center mb-8">
             Otevírací doba
           </h1>
@@ -82,7 +82,7 @@ const OteviraciDoba = () => {
             {Object.entries(oteviraciDoby).map(([klic, { nazev, dny }]) => (
               <div
                 key={klic}
-                className="bg-gray-900 p-6 rounded-xl border border-yellow-400"
+                className="bg-zinc-700 bg-opacity-80 shadow-lg p-6 rounded-xl "
               >
                 <h2 className="text-xl font-semibold text-center mb-4 text-yellow-300">
                   {nazev}

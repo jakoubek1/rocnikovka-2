@@ -112,6 +112,10 @@ export default function MainView() {
                 -33%
               </span>
             </p>
+            <p>
+              <span className="font-semibold">Skladové množství: </span>
+              <span>{item.stockQuantity ?? "Není dostupné"}</span>
+            </p>
           </div>
 
           <div>

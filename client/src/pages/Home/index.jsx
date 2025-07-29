@@ -7,7 +7,7 @@ import SectionBgImage from "../../assets/uvod.png";
 import SponsorLarge from "../../assets/sponzor.png";
 import Puma from "../../assets/Puma.jpg";
 import Logo from "../../assets/logo.png";
-import Life from "../../assets/LEPŠÍ.png";
+import Life from "../../assets/Lepsi.png";
 import puma from "../../assets/puma.png";
 import video from "../../assets/video.mp4";
 
@@ -52,7 +52,7 @@ const Home = () => {
     >
       <div className="absolute inset-0 bg-black/10 z-0" />
       <Header />
-<main className="relative flex items-center justify-center text-center px-6 md:px-12 lg:px-24 min-h-[85vh] overflow-hidden mb-16">
+      <main className="relative flex items-center justify-center text-center px-6 md:px-12 lg:px-24 min-h-screen overflow-hidden mb-16">
 
         <div
           className="absolute inset-0 bg-cover bg-center z-0"
@@ -60,8 +60,9 @@ const Home = () => {
         />
         <div className="absolute inset-0 bg-black opacity-30 z-0" />
         <div className="relative z-10 max-w-4xl flex flex-col items-center">
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-6 select-none text-yellow-500">
-            Vítejte v Marvel gym
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-extrabold mb-6 select-none text-yellow-500">
+
+            Vítejte v Marvel Gym
           </h1>
 
           <div className="flex gap-6 justify-center flex-wrap mb-8">
@@ -86,15 +87,14 @@ const Home = () => {
         </div>
       </main>
 
-     
+      
       <div className="flex flex-col md:flex-row w-[90%] mx-auto my-12 h-auto md:h-[450px] bg-zinc-900 text-white p-8 rounded-2xl border-2 border-yellow-400">
         <div className="flex-1 flex flex-col justify-center text-left p-6">
           <h1 className="text-5xl font-bold text-yellow-400 mb-6 drop-shadow-md">
             Co u nás najdeš
           </h1>
           <p className="text-white text-base md:text-lg leading-relaxed">
-            Naše posilovny patří mezi ty nejlepší v Mladé Boleslavi! Nabízíme špičkové vybavení, moderní zázemí a přátelskou atmosféru v obou našich provozovnách. Ať už chceš shodit pár kil, nabrat svaly nebo si jen vyčistit hlavu po náročném dni, u nás najdeš ideální prostor pro svůj trénink. Naši profesionální trenéři ti pomohou s plánem, motivací i technikou. Tak na co ještě čekáš? Přijď si zacvičit – tvé nové já začíná právě tady, u nás v Marvel Gym!
-
+          Naše posilovny patří mezi nejlepší fitness centra v Mladé Boleslavi a okolí. Nabízíme ti špičkové vybavení od předních světových značek, moderní a čisté zázemí a přátelskou atmosféru, která tě bude motivovat k dosažení tvých cílů. Ať už chceš zhubnout pár kilogramů, nabrat svalovou hmotu, zlepšit kondici nebo si jednoduše odpočinout a vyčistit mysl po náročném dni, u nás najdeš vše, co potřebuješ. Naši zkušení a profesionální trenéři jsou tu pro tebe – pomohou ti sestavit efektivní tréninkový plán, poradí s technikou a podpoří tě, abys vydržel a dosáhl vytoužených výsledků. Marvel Gym není jen místo na cvičení, je to komunita lidí, kteří si vzájemně fandí a společně rostou. Přijď a zažij energii, která tě nakopne! Tvé nové já začíná právě tady, v Marvel Gym.
           </p>
         </div>
         <div className="flex-1 flex justify-center items-center p-6n  border-yellow-500">
@@ -110,7 +110,7 @@ const Home = () => {
       
       <div className="w-[90%] mx-auto my-10 max-w-4xl relative">
         <h2 className="text-5xl font-bold text-yellow-400 mb-4 text-center">
-          Jak to u nás vypadá
+          Naše prostory
         </h2>
 
         <div className="relative overflow-hidden rounded-2xl border-2 border-yellow-400 h-[600px] flex items-center justify-center bg-black">
@@ -245,4 +245,4 @@ const Home = () => {
   );
 };
 
-export default Home; 
+export default Home;
