@@ -13,14 +13,14 @@ const authRouter = require("./routes/Auth");
 const reservationRouter = require("./routes/reservation");
 const stripeRouter = require("./routes/stripe");
 const searchRouter = require("./routes/Search"); 
+const orderRouter = require("./routes/order");
 
 const app = express();
 
 
 mongoose
   .connect(process.env.DB_KEY)
-  .connect("mongodb+srv://admin:adminadmin@cluster0.eblkf.mongodb.net/marvelgym?retryWrites=true&w=majority&appName=Cluster0")
-
+  
   .then(() => console.log(" Databáze připojena"))
   .catch((err) => console.error(" nelze se připojit k databázi:", err));
 
@@ -61,6 +61,8 @@ app.use("/auth", authRouter);
 app.use("/reservation", reservationRouter);
 app.use("/stripe", stripeRouter);
 app.use("/search", searchRouter); 
+app.use("/orders", orderRouter);
+
 
 
 app.use((req, res, next) => {

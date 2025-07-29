@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ShoppingBag, Shirt, Home } from "lucide-react";
+import { ShoppingBag, Shirt, Home, List } from "lucide-react";
 import Background from "../../assets/pozadi.jpg";
 
 export default function Admin() {
@@ -9,18 +9,51 @@ export default function Admin() {
   const location = useLocation();
 
   const panels = [
-    { to: "/add-item", icon: <ShoppingBag className="h-6 w-6 text-yellow-500" />, title: "Vytvořit produkt", color: "from-yellow-100 to-yellow-50" },
-    { to: "/view-item", icon: <Shirt className="h-6 w-6 text-yellow-600" />, title: "Zobrazit produkty", color: "from-yellow-100 to-yellow-50" },
-    { to: "/", icon: <Home className="h-6 w-6 text-yellow-500" />, title: "Hlavní stránka", color: "from-yellow-100 to-yellow-50" },
-    { to: "/add-reservation", icon: <ShoppingBag className="h-6 w-6 text-yellow-500" />, title: "Vytvořit rezervaci", color: "from-yellow-100 to-yellow-50" },
-    { to: "/view-reservation", icon: <ShoppingBag className="h-6 w-6 text-yellow-500" />, title: "Zobrazit rezervace", color: "from-yellow-100 to-yellow-50" },
+    {
+      to: "/add-item",
+      icon: <ShoppingBag className="h-6 w-6 text-yellow-500" />,
+      title: "Vytvořit produkt",
+      color: "from-yellow-100 to-yellow-50",
+    },
+    {
+      to: "/view-item",
+      icon: <Shirt className="h-6 w-6 text-yellow-600" />,
+      title: "Zobrazit produkty",
+      color: "from-yellow-100 to-yellow-50",
+    },
+    {
+      to: "/add-reservation",
+      icon: <ShoppingBag className="h-6 w-6 text-yellow-500" />,
+      title: "Vytvořit rezervaci",
+      color: "from-yellow-100 to-yellow-50",
+    },
+    {
+      to: "/view-reservation",
+      icon: <ShoppingBag className="h-6 w-6 text-yellow-500" />,
+      title: "Zobrazit rezervace",
+      color: "from-yellow-100 to-yellow-50",
+    },
+    {
+      to: "/orders",
+      icon: <List className="h-6 w-6 text-yellow-500" />,
+      title: "Objednávky",
+      color: "from-yellow-100 to-yellow-50",
+    },
+    {
+      to: "/",
+      icon: <Home className="h-6 w-6 text-yellow-500" />,
+      title: "Hlavní stránka",
+      color: "from-yellow-100 to-yellow-50",
+    },
   ];
 
   useEffect(() => {
-    
-    if (location.pathname !== "/admin" && !location.pathname.startsWith("/admin/")) {
+    if (
+      location.pathname !== "/admin" &&
+      !location.pathname.startsWith("/admin/")
+    ) {
       setIsLoggedIn(false);
-      setPassword(""); 
+      setPassword("");
     }
   }, [location]);
 
@@ -89,3 +122,4 @@ export default function Admin() {
     </div>
   );
 }
+

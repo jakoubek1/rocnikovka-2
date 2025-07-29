@@ -22,6 +22,8 @@ import ResMainView from "./ResMainView/index";
 import ResMainList from "./ResMainList/index"
 import Cart from "./Cart";
 import Completion from "./Completion";
+import Orders from "./orders/index";
+import OrdersList from "./orders/mainlist";
 
 export default function AppRoutes() {
   return (
@@ -53,6 +55,8 @@ export default function AppRoutes() {
                 
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/completion" element={<Completion />} />
+                <Route path="/orders" element={<Orders />} />
+                <Route patk="/order-list" element={<OrdersList />} />
             </Routes>
         </BrowserRouter>
     </>

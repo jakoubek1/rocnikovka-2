@@ -25,7 +25,8 @@ const Mista = () => {
                 allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Marvel Gym 1"
-                className="w-[90%] h-[400px] rounded-xl object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+                className="w-[90%] h-[400px] rounded-xl object-cover transition-transform duration-300 
+                ease-in-out hover:scale-105"
               ></iframe>
               <p className="text-gray-300 text-sm mt-4">
                 Staroměstské nám. 20/21, 293 01 Mladá Boleslav II
