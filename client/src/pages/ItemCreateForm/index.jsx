@@ -118,7 +118,7 @@ export default function CarCreateForm() {
         {info && <p className="mt-4 text-red-600">{info}</p>}
 
         <Link to="/admin" className="block mt-6 text-yellow-400 hover:underline">
-          ← Zpět do admin panelu
+           Zpět do admin panelu
         </Link>
       </div>
     </div>

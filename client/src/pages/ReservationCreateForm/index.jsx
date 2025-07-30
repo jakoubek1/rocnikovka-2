@@ -113,7 +113,7 @@ export default function ReservationCreateForm() {
           to="/admin"
           className="block mt-6 text-yellow-400 hover:underline"
         >
-          ← Zpět do admin panelu
+          Zpět do admin panelu
         </Link>
       </div>
     </div>

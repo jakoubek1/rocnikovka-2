@@ -24,7 +24,7 @@ export default function ReservationUpdateForm() {
 
   const updateForm = async () => {
     const data = await updateReservation(id, formData);
-    if (data.status === 200) return navigate(`/res/${id}`);
+    if (data.status === 200) return navigate(`/rezervace/${id}`); 
     setInfo(data.message);
   };
 

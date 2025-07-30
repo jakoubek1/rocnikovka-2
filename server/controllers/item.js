@@ -3,18 +3,16 @@ const Item = require("../models/Item");
 exports.getAllItems = async (req, res, next) => {
   try {
     const data = await Item.find();
-    if (data && data.length !== 0) {
-      return res.status(200).json({
-        message: "Items found",
-        payload: data,
-      });
-    }
-    return res.status(404).json({
-      message: "Items not found",
+    return res.status(200).json({
+      message: "Items fetched",
+      payload: data, 
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: "Server error", error: err.message });
+    return res.status(500).json({
+      message: "Server error",
+      error: err.message || err,
+    });
   }
 };
 
@@ -29,10 +27,14 @@ exports.getItemById = async (req, res, next) => {
     }
     return res.status(404).json({
       message: "Item not found",
+      payload: null,
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: "Server error", error: err.message });
+    return res.status(500).json({
+      message: "Server error",
+      error: err.message || err,
+    });
   }
 };
 
@@ -47,18 +49,16 @@ exports.createItem = async (req, res, next) => {
       stockQuantity: req.body.stockQuantity,
     });
     const result = await data.save();
-    if (result) {
-      return res.status(201).json({
-        message: "Item created",
-        payload: result,
-      });
-    }
-    return res.status(500).json({
-      message: "Item creation failed",
+    return res.status(201).json({
+      message: "Item created",
+      payload: result,
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: "Server error", error: err.message });
+    return res.status(500).json({
+      message: "Server error",
+      error: err.message || err,
+    });
   }
 };
 
@@ -72,7 +72,10 @@ exports.updateItem = async (req, res, next) => {
       image: req.body.image,
       stockQuantity: req.body.stockQuantity,
     };
-    const result = await Item.findByIdAndUpdate(req.params.id, data, { new: true, runValidators: true });
+    const result = await Item.findByIdAndUpdate(req.params.id, data, {
+      new: true,
+      runValidators: true,
+    });
     if (result) {
       return res.status(200).json({
         message: "Item updated",
@@ -81,10 +84,14 @@ exports.updateItem = async (req, res, next) => {
     }
     return res.status(404).json({
       message: "Item not found to update",
+      payload: null,
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: "Server error", error: err.message });
+    return res.status(500).json({
+      message: "Server error",
+      error: err.message || err,
+    });
   }
 };
 
@@ -99,9 +106,13 @@ exports.deleteItem = async (req, res, next) => {
     }
     return res.status(404).json({
       message: "Item not found to delete",
+      payload: null,
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: "Server error", error: err.message });
+    return res.status(500).json({
+      message: "Server error",
+      error: err.message || err,
+    });
   }
 };

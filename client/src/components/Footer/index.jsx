@@ -63,7 +63,7 @@ export default function Footer() {
           <h4 className="text-white text-lg font-semibold mb-4">Rychlé odkazy</h4>
           <ul className="space-y-2 text-sm">
             <li>
-              <a href="/treneri" className="hover:text-yellow-400 transition">
+              <a href="/rezervace" className="hover:text-yellow-400 transition">
                 Rezervace trenérů
               </a>
             </li>

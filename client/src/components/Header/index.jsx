@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
-
 import { ShoppingCart } from "lucide-react";
-
-
 
 import logo from "../../assets/logo.png";
 import Search from "../search/index";
@@ -48,8 +44,7 @@ export default function Header() {
           <Link
             to="/cart"
             aria-label="Shopping cart"
-            className="relative p-2 rounded-md text-gray-300 hover:text-yellow-400 focus:outline-none focus:ring-2
-             focus:ring-yellow-400 transition"
+            className="relative p-2 rounded-md text-gray-300 hover:text-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition"
           >
             <ShoppingCart className="h-7 w-7" />
           </Link>
@@ -85,6 +80,22 @@ export default function Header() {
           </button>
         </div>
       </div>
+
+      
+      {menuOpen && (
+        <div className="md:hidden bg-zinc-800 text-gray-300 px-6 py-4 space-y-4">
+          {navLinks.map(({ name, to }) => (
+            <Link
+              key={name}
+              to={to}
+              onClick={() => setMenuOpen(false)}
+              className="block text-lg font-medium hover:text-yellow-400 transition"
+            >
+              {name}
+            </Link>
+          ))}
+        </div>
+      )}
     </header>
   );
 }

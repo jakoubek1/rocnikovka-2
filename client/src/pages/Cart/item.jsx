@@ -5,26 +5,30 @@ import { X } from "lucide-react";
 import { Toaster, toast } from "sonner";
 
 export default function CartItem(props) {
+  const [item, setItem] = useState();
+
   useEffect(() => {
     load();
   }, []);
 
-  const [item, setItem] = useState();
-
   const load = async () => {
     const data = await getItemById(props.id);
 
-    if (data.status === 200) setItem(data.payload);
-    
+    if (data.status === 200) {
+      setItem(data.payload);
+    } else if (data.status === 404) {
+      
+      removeItemFromCart(true); 
+    }
   };
 
-  const removeItemFromCart = () => {
+  const removeItemFromCart = (silent = false) => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     cart.splice(props.index, 1);
     localStorage.setItem("cart", JSON.stringify(cart));
 
-    toast.success("Položka byla odebrána z košíku.");
+    if (!silent) toast.success("Položka byla odebrána z košíku.");
     window.dispatchEvent(new Event("cartReload"));
   };
 
@@ -46,7 +50,10 @@ export default function CartItem(props) {
               <p>Velikost: {props.size}</p>
               <p>{props.count}x</p>
             </div>
-            <X className="absolute top-0 right-0 cursor-pointer" onClick={removeItemFromCart} />
+            <X
+              className="absolute top-0 right-0 cursor-pointer"
+              onClick={() => removeItemFromCart(false)}
+            />
           </div>
         ) : (
           <div className="flex items-center justify-center">

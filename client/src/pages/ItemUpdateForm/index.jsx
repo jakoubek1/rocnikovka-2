@@ -105,7 +105,7 @@ export default function ItemUpdateForm() {
 
         <div className="mt-6 flex justify-between items-center gap-4 text-yellow-400 text-sm">
           <Link to={`/item/${id}`} className="hover:underline">
-            ← Zpět na detail produktu
+             Zpět na detail produktu
           </Link>
           <Link to="/admin" className="hover:underline">
             Admin panel

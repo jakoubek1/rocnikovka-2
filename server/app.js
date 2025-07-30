@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
 const mongoose = require("mongoose");
+
 require("dotenv").config();
 
 const indexRouter = require("./routes/index");
@@ -17,13 +18,10 @@ const orderRouter = require("./routes/order");
 
 const app = express();
 
-
 mongoose
-  .connect(process.env.DB_KEY)
-  
-  .then(() => console.log(" Databáze připojena"))
-  .catch((err) => console.error(" nelze se připojit k databázi:", err));
-
+  .connect("mongodb+srv://admin:adminadmin@cluster0.eblkf.mongodb.net/marvelgym?retryWrites=true&w=majority&appName=Cluster0")
+  .then(() => console.log("Databáze připojena"))
+  .catch((err) => console.error("Nelze se připojit k databázi:", err));
 
 const allowedOrigins = [
   "http://localhost:5173",
@@ -47,13 +45,11 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-
 
 app.use("/", indexRouter);
 app.use("/item", itemRouter);
@@ -63,12 +59,9 @@ app.use("/stripe", stripeRouter);
 app.use("/search", searchRouter); 
 app.use("/orders", orderRouter);
 
-
-
 app.use((req, res, next) => {
   next(createError(404));
 });
-
 
 app.use((err, req, res, next) => {
   res.status(err.status || 500).json({

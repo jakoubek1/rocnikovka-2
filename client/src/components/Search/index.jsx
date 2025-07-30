@@ -56,7 +56,7 @@ export default function Search() {
           searchOpen ? "text-yellow-400" : "text-gray-300"
         }`}
       >
-        <SearchIcon size={20} />
+        <SearchIcon size={24} />
       </button>
       <input
         ref={searchInputRef}

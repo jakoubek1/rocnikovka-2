@@ -4,13 +4,15 @@ import { getReservationById } from "../../models/Reservation";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { Toaster, toast } from "sonner";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function MainView() {
   const { id } = useParams();
   const [item, setItem] = useState();
   const [isLoaded, setLoaded] = useState(false);
 
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState("");
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
@@ -41,8 +43,8 @@ export default function MainView() {
 
   const getMinDate = () => {
     const today = new Date();
-    today.setDate(today.getDate() + 2); 
-    return today.toISOString().split("T")[0]; 
+    today.setDate(today.getDate() + 2);
+    return today;
   };
 
   const handleConfirm = () => {
@@ -90,7 +92,10 @@ export default function MainView() {
             draggable="false"
           />
           <p className="text-sm text-gray-400 mt-4 text-center max-w-md">
-Trenéři vidí váš zájem o rezervaci v daném čase, proto se vám do dvou dnů ozvou na telefonní číslo, které jste zadali, a zkonzultují s vámi čas, cenu a vaše požadavky. Sdělte jim, co si přejete, aby pro vás trenér zařídil. Těšíme se na vás!          </p>
+            Trenéři vidí váš zájem o rezervaci v daném čase, proto se vám do dvou dnů ozvou na telefonní číslo,
+            které jste zadali, a zkonzultují s vámi čas, cenu a vaše požadavky.
+            Sdělte jim, co si přejete, aby pro vás trenér zařídil. Těšíme se na vás!
+          </p>
         </div>
 
         <div className="flex flex-col justify-start gap-6">
@@ -99,9 +104,8 @@ Trenéři vidí váš zájem o rezervaci v daném čase, proto se vám do dvou d
           </h1>
 
           <p className="text-lg text-white font-semibold">
-            Naši trenéři jsou ti nejlepší – díky odbornosti, individuálnímu
-            přístupu a motivaci vás dovedou k vašim cílům rychle a efektivně.
-            Jsou tu, aby vás podpořili na cestě ke zdraví, síle a sebevědomí.
+            Naši trenéři jsou ti nejlepší – díky odbornosti, individuálnímu přístupu a motivaci vás dovedou k vašim cílům
+            rychle a efektivně. Jsou tu, aby vás podpořili na cestě ke zdraví, síle a sebevědomí.
           </p>
 
           <div>
@@ -133,17 +137,20 @@ Trenéři vidí váš zájem o rezervaci v daném čase, proto se vám do dvou d
           </div>
 
           <div>
-            <label htmlFor="date" className="block text-sm font-semibold mb-2">
+            <label className="block text-sm font-semibold mb-2">
               Vyber datum:
             </label>
-            <input
-              type="date"
-              id="date"
-              value={selectedDate}
-              onChange={(e) => setSelectedDate(e.target.value)}
-              min={getMinDate()}
-              className="bg-zinc-900 border border-white rounded-full px-4 py-2 text-white w-full hover:border-gray-400 focus:outline-none shadow-sm transition"
-            />
+            <div className="w-full">
+              <DatePicker
+                selected={selectedDate}
+                onChange={(date) => setSelectedDate(date)}
+                minDate={getMinDate()}
+                placeholderText="Vyberte datum"
+                dateFormat="dd.MM.yyyy"
+                wrapperClassName="w-full"
+                className="bg-zinc-900 border border-white rounded-full px-4 py-2 text-white w-full hover:border-gray-400 focus:outline-none shadow-sm transition"
+              />
+            </div>
             <p className="text-xs text-gray-400 mt-1">
               * Rezervace je možná nejdříve 2 dny dopředu
             </p>
